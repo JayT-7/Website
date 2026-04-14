@@ -12,8 +12,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont,
-'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             color: #e0e0e0;
             background: #0a0e27;
@@ -28,8 +27,7 @@
             height: 100%;
             background-image:
                 linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px,
-transparent 1px);
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 0;
@@ -51,8 +49,7 @@ transparent 1px);
             left: -100%;
             width: 200%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,
-255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
             animation: scan 3s infinite;
         }
 
@@ -133,8 +130,7 @@ transparent 1px);
         }
 
         section {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6),
-rgba(15, 20, 40, 0.6));
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6), rgba(15, 20, 40, 0.6));
             backdrop-filter: blur(10px);
             margin: 40px 0;
             padding: 60px;
@@ -152,8 +148,7 @@ rgba(15, 20, 40, 0.6));
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top right, rgba(0,
-255, 255, 0.05), transparent);
+            background: radial-gradient(circle at top right, rgba(0, 255, 255, 0.05), transparent);
             pointer-events: none;
         }
 
@@ -187,8 +182,7 @@ rgba(15, 20, 40, 0.6));
         }
 
         .skill-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255,
-0.05), rgba(0, 255, 136, 0.05));
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 255, 136, 0.05));
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(0, 255, 255, 0.3);
@@ -204,8 +198,7 @@ rgba(15, 20, 40, 0.6));
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 255,
-0.1), transparent);
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent);
             opacity: 0;
             transition: opacity 0.4s;
         }
@@ -239,8 +232,7 @@ rgba(15, 20, 40, 0.6));
         }
 
         .project-card {
-            background: linear-gradient(135deg, rgba(20, 25, 45, 0.8),
-rgba(10, 15, 30, 0.8));
+            background: linear-gradient(135deg, rgba(20, 25, 45, 0.8), rgba(10, 15, 30, 0.8));
             padding: 35px;
             border-radius: 15px;
             border: 1px solid rgba(0, 255, 255, 0.2);
@@ -256,8 +248,7 @@ rgba(10, 15, 30, 0.8));
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,
-255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
             transition: left 0.5s;
         }
 
@@ -283,6 +274,55 @@ rgba(10, 15, 30, 0.8));
             line-height: 1.7;
         }
 
+        .cert-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cert-label {
+            font-size: 1.1em;
+            color: #b0b0b0;
+            text-align: center;
+        }
+
+        .cert-frame {
+            width: 100%;
+            height: 600px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .cert-fallback {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #b0b0b0;
+        }
+
+        .cert-download {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 255, 136, 0.15));
+            color: #00ffff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            transition: all 0.4s;
+        }
+
+        .cert-download:hover {
+            background: linear-gradient(135deg, #00ffff, #00ff88);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
         .contact-info {
             text-align: center;
             font-size: 1.2em;
@@ -294,7 +334,6 @@ rgba(10, 15, 30, 0.8));
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
-            position: relative;
         }
 
         .contact-info a:hover {
@@ -335,11 +374,9 @@ rgba(10, 15, 30, 0.8));
         @media (max-width: 768px) {
             header h1 { font-size: 2.5em; }
             section { padding: 40px 25px; }
-            nav a {
-                display: block;
-                margin: 15px 0;
-            }
+            nav a { display: block; margin: 15px 0; }
             h2 { font-size: 2em; }
+            .cert-frame { height: 400px; }
         }
     </style>
 </head>
@@ -348,31 +385,29 @@ rgba(10, 15, 30, 0.8));
 
     <header>
         <h1>JAY SINGH TOMAR</h1>
-        <p>Arduino Enthusiast • Tinkerer • FTC Competitor • Aspiring Engineer </p>
+        <p>Arduino Enthusiast • Tinkerer • FTC Competitor • Aspiring Engineer</p>
     </header>
 
     <nav>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
-        <a href="#Images">Images</a>
+        <a href="#images">Images</a>
         <a href="#contact">Contact</a>
     </nav>
 
     <div class="container">
+
         <section id="about">
             <h2>About Me</h2>
             <p style="font-size: 1.15em; line-height: 1.9; color: #c0c0c0;">
                 I'm Jay Tomar, a high schooler with a passion for technology and robotics.
-                I work on Arduino projects, pcb/circuit design, and am in competitive robotics through FIRST Tech
-Challenge.
+                I work on Arduino projects, PCB/circuit design, and am in competitive robotics through FIRST Tech Challenge.
                 My hands-on experience has taught me problem-solving, precision, and dedication
                 to deliver quality results.
             </p>
-            <p style="font-size: 1.15em; line-height: 1.9; margin-top:
-25px; color: #c0c0c0;">
-                I'm actively seeking opportunities to apply my skills
-in a professional environment.
+            <p style="font-size: 1.15em; line-height: 1.9; margin-top: 25px; color: #c0c0c0;">
+                I'm actively seeking opportunities to apply my skills in a professional environment.
             </p>
         </section>
 
@@ -381,85 +416,80 @@ in a professional environment.
             <div class="skills-grid">
                 <div class="skill-card">
                     <h3>🔌 Arduino Development</h3>
-                    <p>Introductory C programming and basic circuit design .</p>
+                    <p>Introductory C programming and basic circuit design.</p>
                 </div>
                 <div class="skill-card">
                     <h3>🔧 Electronics & Circuits</h3>
-                    <p>Basic circutry and breadboard design,
-soldering, and current elctronics projects</p>
+                    <p>Basic circuitry and breadboard design, soldering, and current electronics projects.</p>
                 </div>
                 <div class="skill-card">
                     <h3>🤖 Robotics (FTC)</h3>
-                    <p>Robot CAD design, basic programming, robot and robot assembly construction,
-and competition strategy through FIRST Tech Challenge.</p>
+                    <p>Robot CAD design, basic programming, robot assembly construction, and competition strategy through FIRST Tech Challenge.</p>
                 </div>
                 <div class="skill-card">
                     <h3>💻 Programming</h3>
-                    <p>C for Arduino, onbot Java, python, use of servos and motors in current projects, and programming logic.</p>
+                    <p>C for Arduino, OnBot Java, Python, use of servos and motors in current projects, and programming logic.</p>
                 </div>
                 <div class="skill-card">
                     <h3>👥 Technical Communication</h3>
-                    <p>Understanding of technical concepts, and ability to collaborate on engineering
-challenges.</p>
+                    <p>Understanding of technical concepts and ability to collaborate on engineering challenges.</p>
                 </div>
                 <div class="skill-card">
                     <h3>⚡ Problem Solving</h3>
-                    <p>Quick thinking, effective collaboration, and solid results</p>
+                    <p>Quick thinking, effective collaboration, and solid results.</p>
                 </div>
-                 <div class="skill-card">
-                    <h3>💻 Software Tools</h3>
-                    <p>MS Word, Powerpoint, basic Excel, Fusion, TinkerCAD, KiCAD, Canva, Android Studio, WeVideo, and VScode </p>
+                <div class="skill-card">
+                    <h3>🖥️ Software Tools</h3>
+                    <p>MS Word, PowerPoint, basic Excel, Fusion 360, TinkerCAD, KiCAD, Canva, Android Studio, WeVideo, and VSCode.</p>
                 </div>
             </div>
         </section>
-        
 
         <section id="projects">
             <h2>Experience & Projects</h2>
             <div class="projects">
                 <div class="project-card">
                     <h3>FIRST Tech Challenge</h3>
-                    <p>Team lead in FTC robotics
-competitions, main CAD designer, programming assistant, and various mechanisms built.</p>
+                    <p>Team lead in FTC robotics competitions, main CAD designer, programming assistant, and various mechanisms built.</p>
                 </div>
                 <div class="project-card">
                     <h3>Arduino Projects</h3>
-                    <p>Developed basic Arduino-based projects
-servo control, led blinking, and interactive
-programs. Currently working on Arduino based CNC drawing machine</p>
+                    <p>Developed basic Arduino-based projects including servo control, LED blinking, and interactive programs. Currently working on an Arduino-based CNC drawing machine.</p>
                 </div>
                 <div class="project-card">
                     <h3>Circuit Design & Prototyping</h3>
-                    <p>Created custom electronic circuits on Ki-CAD and made various basic breadboard circuts</p>
+                    <p>Created custom electronic circuits on KiCAD and made various basic breadboard circuits.</p>
                 </div>
-<a href="designs.html" target="_blank" style="text-decoration: none;">
-    <div class="project-card">
-        <h3>3D Designs</h3>
-        <p>Multiple 3d designs used for various purposes such as FTC or personal projects all free to use on this website.</p>  
-    </div>
-</a>
+                <a href="designs.html" target="_blank" style="text-decoration: none;">
+                    <div class="project-card">
+                        <h3>3D Designs</h3>
+                        <p>Multiple 3D designs used for various purposes such as FTC or personal projects — all free to use on this website.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
         <section id="images">
             <h2>Certificates</h2>
             <div class="cert-wrapper">
                 <p class="cert-label">Java Certificate — Jay Singh Tomar</p>
- 
+
                 <iframe
                     class="cert-frame"
                     src="JayTomarJavaCertificate.pdf"
                     title="Jay Tomar Java Certificate"
                     type="application/pdf">
-                    <!-- Fallback shown if iframe PDFs aren't supported -->
                     <div class="cert-fallback" style="display:block;">
                         <p style="margin-bottom:20px;">Your browser can't display the PDF inline.</p>
                         <a href="JayTomarJavaCertificate.pdf" class="cert-download" download>⬇ Download Certificate</a>
                     </div>
                 </iframe>
- 
-                <!-- Always-visible download link -->
+
                 <a href="JayTomarJavaCertificate.pdf" class="cert-download" target="_blank">View / Download Certificate</a>
             </div>
         </section>
-  <section id="contact">
+
+        <section id="contact">
             <h2>Let's Connect</h2>
             <div class="contact-info">
                 <p><strong>Email:</strong> <a href="mailto:jaytomarsingh@gmail.com">jaytomarsingh@gmail.com</a></p>
@@ -470,9 +500,9 @@ programs. Currently working on Arduino based CNC drawing machine</p>
                 Available for part-time positions and internships
             </p>
         </section>
- 
+
     </div>
- 
+
     <footer>
         <p>&copy 2026 Jay Singh Tomar. All rights reserved.</p>
     </footer>

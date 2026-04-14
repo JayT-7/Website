@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Designs – Jay Singh Tomar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cyan: #00ffff;
+            --green: #00ff88;
+            --bg: #0a0e27;
+            --bg2: #1a1f3a;
+            --text: #e0e0e0;
+            --muted: #b0b0b0;
+            --dim: #808080;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,255,255,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,255,.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Header ── */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
+            padding: 90px 20px 60px;
+            text-align: center;
+            border-bottom: 2px solid rgba(0,255,255,.2);
+            overflow: hidden;
+            z-index: 1;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,.08), transparent);
+            animation: scan 3s infinite;
+        }
+        @keyframes scan { 0%{left:-100%} 100%{left:100%} }
+
+        .back-link {
+            position: absolute;
+            top: 28px; left: 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .85em;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color .3s;
+        }
+        .back-link:hover { color: var(--green); }
+        .back-link:hover svg { transform: translateX(-4px); }
+        .back-link svg { transition: transform .3s; }
+
+        header h1 {
+            font-size: 3.2em;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%,100% { filter: drop-shadow(0 0 16px rgba(0,255,255,.5)); }
+            50%      { filter: drop-shadow(0 0 36px rgba(0,255,255,.9)); }
+        }
+        header p {
+            margin-top: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .95em;
+            color: var(--cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: .8;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10,14,39,.95);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,255,255,.2);
+            text-align: center;
+        }
+        nav a {
+            color: var(--cyan);
+            text-decoration: none;
+            margin: 0 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: .85em;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color .3s;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            transition: width .3s;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--green); }
+        nav a.active { color: var(--green); }
+
+        /* ── Container ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header { margin-bottom: 48px; }
+        .section-header h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cyan);
+            display: inline-block;
+            position: relative;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0;
+            width: 60px; height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--green));
+            border-radius: 2px;
+        }
+        .section-header p {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 1.05em;
+            max-width: 600px;
+        }
+
+        /* ── Info banner ── */
+        .info-banner {
+            background: rgba(0,255,255,.06);
+            border: 1px solid rgba(0,255,255,.2);
+            border-radius: 12px;
+            padding: 18px 24px;
+            margin-bottom: 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .82em;
+            color: var(--cyan);
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ── Filter bar ── */
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(0,255,255,.3);
+            color: var(--muted);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .8em;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all .3s;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(0,255,255,.1);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0,255,255,.2);
+        }
+
+        /* ── Cards grid ── */
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .design-card {
+            background: linear-gradient(135deg, rgba(26,31,58,.7), rgba(10,15,30,.8));
+            border: 1px solid rgba(0,255,255,.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all .4s cubic-bezier(.175,.885,.32,1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .design-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,.07), transparent);
+            transition: left .5s;
+            pointer-events: none;
+        }
+        .design-card:hover::after { left: 100%; }
+        .design-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--cyan);
+            box-shadow: 0 16px 50px rgba(0,255,255,.2);
+        }
+
+        /* Preview area — click to open viewer */
+        .card-preview {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0,255,255,.04), rgba(0,255,136,.04));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0,255,255,.15);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .card-preview:hover .view-hint { opacity: 1; }
+        .card-preview:hover svg.model-icon { opacity: .3; }
+
+        .view-hint {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity .3s;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .8em;
+            letter-spacing: 1px;
+            color: var(--cyan);
+            text-transform: uppercase;
+        }
+        .view-hint svg { width: 32px; height: 32px; }
+
+        svg.model-icon {
+            opacity: .75;
+            filter: drop-shadow(0 0 18px rgba(0,255,136,.4));
+            animation: floatIcon 4s ease-in-out infinite;
+            transition: opacity .3s;
+        }
+        @keyframes floatIcon {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+
+        .tag {
+            position: absolute;
+            top: 14px; right: 14px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .7em;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        .tag-ftc      { background: rgba(0,255,255,.15);  color: var(--cyan);  border: 1px solid rgba(0,255,255,.3); }
+        .tag-personal { background: rgba(0,255,136,.15);  color: var(--green); border: 1px solid rgba(0,255,136,.3); }
+        .tag-other    { background: rgba(255,215,0,.1);   color: #ffd700;      border: 1px solid rgba(255,215,0,.3); }
+
+        .card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body h3 {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+        .card-body p {
+            color: var(--muted);
+            font-size: .9em;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .card-meta {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .75em;
+            color: var(--dim);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .view-btn, .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, rgba(0,255,255,.15), rgba(0,255,136,.1));
+            border: 1px solid rgba(0,255,255,.4);
+            color: var(--cyan);
+            padding: 10px 16px;
+            border-radius: 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .75em;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .3s;
+            justify-content: center;
+            flex: 1;
+        }
+        .view-btn:hover, .download-btn:hover {
+            background: linear-gradient(135deg, rgba(0,255,255,.3), rgba(0,255,136,.2));
+            box-shadow: 0 0 20px rgba(0,255,255,.3);
+            color: #fff;
+            border-color: var(--cyan);
+        }
+
+        /* ── Viewer Modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 20, .92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: linear-gradient(135deg, #0f1428, #0a0e27);
+            border: 1px solid rgba(0,255,255,.3);
+            border-radius: 20px;
+            width: min(900px, 94vw);
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 80px rgba(0,255,255,.15);
+            animation: modalIn .3s cubic-bezier(.175,.885,.32,1.275);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(.92) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 28px;
+            border-bottom: 1px solid rgba(0,255,255,.15);
+        }
+        .modal-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--cyan);
+            font-size: 1em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .modal-close {
+            background: none;
+            border: 1px solid rgba(0,255,255,.3);
+            color: var(--cyan);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s;
+        }
+        .modal-close:hover {
+            background: rgba(0,255,255,.15);
+            box-shadow: 0 0 12px rgba(0,255,255,.3);
+        }
+
+        #viewer-canvas-wrap {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #070a1a;
+        }
+        #viewer-canvas-wrap canvas { display: block; }
+
+        .viewer-controls-hint {
+            position: absolute;
+            bottom: 12px; left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .7em;
+            color: rgba(0,255,255,.4);
+            letter-spacing: 1px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .viewer-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--cyan);
+            font-size: .85em;
+            letter-spacing: 2px;
+        }
+        .viewer-loading .spinner {
+            width: 40px; height: 40px;
+            border: 2px solid rgba(0,255,255,.2);
+            border-top-color: var(--cyan);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .modal-footer {
+            padding: 16px 28px;
+            border-top: 1px solid rgba(0,255,255,.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .modal-meta {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .75em;
+            color: var(--dim);
+            letter-spacing: 1px;
+        }
+        .modal-dl-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--cyan), var(--green));
+            color: #000;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all .3s;
+            box-shadow: 0 4px 20px rgba(0,255,255,.3);
+        }
+        .modal-dl-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,255,255,.5);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: linear-gradient(135deg, var(--bg2), var(--bg));
+            color: var(--cyan);
+            text-align: center;
+            padding: 36px;
+            border-top: 2px solid rgba(0,255,255,.2);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: .85em;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+        footer a { color: var(--green); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @keyframes floatIcon {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2em; }
+            .designs-grid { grid-template-columns: 1fr; }
+            nav a { display: inline-block; margin: 8px 10px; font-size: .8em; }
+            #viewer-canvas-wrap { height: 320px; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<header>
+    <a href="index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+        </svg>
+        Back to Portfolio
+    </a>
+    <h1>3D DESIGNS</h1>
+    <p>Free to use · Open source · Download &amp; print</p>
+</header>
+
+<nav>
+    <a href="index.html#about">About</a>
+    <a href="index.html#skills">Skills</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="designs.html" class="active">Designs ↗</a>
+</nav>
+
+<div class="container">
+    <div class="section-header">
+        <h2>Design Library</h2>
+        <p>All designs are free to download and use. Click any card to preview it in 3D, then download the STL.</p>
+    </div>
+
+    <div class="info-banner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        All files are free to use for personal and FTC competition purposes. Attribution appreciated but not required.
+    </div>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+        <button class="filter-btn" onclick="filterCards('ftc', this)">FTC Robotics</button>
+        <button class="filter-btn" onclick="filterCards('personal', this)">Personal</button>
+        <button class="filter-btn" onclick="filterCards('other', this)">Other</button>
+    </div>
+
+    <!--
+    ═══════════════════════════════════════════════════════
+    HOW TO ADD A DESIGN CARD
+    ───────────────────────────────────────────────────────
+    Copy the block below, paste it inside .designs-grid.
+    Set data-stl to the STL filename (must be in the same folder).
+    Set data-category to: ftc | personal | other
+
+    <div class="design-card" data-category="personal" data-stl="your_file.stl">
+        <div class="card-preview" onclick="openViewer(this)">
+            <span class="tag tag-personal">Personal</span>
+            <svg class="model-icon" ...> ... </svg>
+            <div class="view-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"/>
+                    <path d="M2 15.5l10 5.5 10-5.5" opacity=".6"/>
+                    <path d="M2 12l10 5.5 10-5.5" opacity=".3"/>
+                </svg>
+                View in 3D
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Design Name</h3>
+            <p>Short description.</p>
+            <div class="card-meta">
+                <span>📐 STL</span>
+                <span>~00 KB</span>
+            </div>
+            <div class="btn-row">
+                <button class="view-btn" onclick="openViewer(this.closest('.design-card').querySelector('.card-preview'))">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"/>
+                        <path d="M2 15.5l10 5.5 10-5.5" opacity=".6"/>
+                    </svg>
+                    View 3D
+                </button>
+                <a class="download-btn" href="your_file.stl" download>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download
+                </a>
+            </div>
+        </div>
+    </div>
+    ═══════════════════════════════════════════════════════
+    -->
+
+    <div class="designs-grid" id="designsGrid">
+
+        <!-- ── Stepper Motor Arm ── -->
+        <div class="design-card" data-category="personal" data-stl="stepper_motor_arm.stl">
+            <div class="card-preview" onclick="openViewer(this)">
+                <span class="tag tag-personal">Personal</span>
+                <svg class="model-icon" width="90" height="90" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="38" width="40" height="30" rx="3" stroke="#00ff88" stroke-width="2" fill="rgba(0,255,136,0.07)"/>
+                    <rect x="48" y="24" width="4" height="14" rx="1" stroke="#00ffff" stroke-width="1.5" fill="rgba(0,255,255,0.1)"/>
+                    <rect x="52" y="20" width="28" height="8" rx="2" stroke="#00ffff" stroke-width="1.5" fill="rgba(0,255,255,0.08)"/>
+                    <circle cx="80" cy="24" r="4" stroke="#00ff88" stroke-width="1.5" fill="rgba(0,255,136,0.12)"/>
+                    <line x1="38" y1="48" x2="38" y2="58" stroke="#00ff88" stroke-width="1" opacity=".5"/>
+                    <line x1="46" y1="48" x2="46" y2="58" stroke="#00ff88" stroke-width="1" opacity=".5"/>
+                    <line x1="54" y1="48" x2="54" y2="58" stroke="#00ff88" stroke-width="1" opacity=".5"/>
+                    <line x1="62" y1="48" x2="62" y2="58" stroke="#00ff88" stroke-width="1" opacity=".5"/>
+                    <circle cx="35" cy="43" r="2" stroke="#00ffff" stroke-width="1" fill="none"/>
+                    <circle cx="65" cy="43" r="2" stroke="#00ffff" stroke-width="1" fill="none"/>
+                    <circle cx="35" cy="63" r="2" stroke="#00ffff" stroke-width="1" fill="none"/>
+                    <circle cx="65" cy="63" r="2" stroke="#00ffff" stroke-width="1" fill="none"/>
+                </svg>
+                <div class="view-hint">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"/>
+                        <path d="M2 15.5l10 5.5 10-5.5" opacity=".6"/>
+                        <path d="M2 12l10 5.5 10-5.5" opacity=".3"/>
+                    </svg>
+                    View in 3D
+                </div>
+            </div>
+            <div class="card-body">
+                <h3>Stepper Motor Arm</h3>
+                <p>Custom arm mount designed for stepper motors. Suitable for personal robotics, automation rigs, and projects requiring precise rotational control.</p>
+                <div class="card-meta">
+                    <span>📐 STL</span>
+                    <span>86 KB · 1,754 triangles</span>
+                </div>
+                <div class="btn-row">
+                    <button class="view-btn" onclick="openViewer(this.closest('.design-card').querySelector('.card-preview'))">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"/>
+                            <path d="M2 15.5l10 5.5 10-5.5" opacity=".6"/>
+                        </svg>
+                        View 3D
+                    </button>
+                    <a class="download-btn" href="stepper_motor_arm.stl" download>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASTE MORE CARDS HERE -->
+
+    </div>
+</div>
+
+<!-- ── 3D Viewer Modal ── -->
+<div class="modal-overlay" id="viewerModal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title" id="modalTitle">3D VIEWER</span>
+            <button class="modal-close" onclick="closeViewer()">✕</button>
+        </div>
+        <div id="viewer-canvas-wrap">
+            <div class="viewer-loading" id="viewerLoading">
+                <div class="spinner"></div>
+                LOADING MODEL...
+            </div>
+        </div>
+        <div class="viewer-controls-hint">🖱 Drag to rotate · Scroll to zoom · Right-drag to pan</div>
+        <div class="modal-footer">
+            <span class="modal-meta" id="modalMeta"></span>
+            <a class="modal-dl-btn" id="modalDlBtn" href="#" download>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download STL
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Jay Singh Tomar — All designs free to use &amp; print &nbsp;·&nbsp; <a href="index.html">Back to Portfolio</a></p>
+</footer>
+
+<!-- Three.js r128 + STLLoader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── Minimal STLLoader inlined (avoids CDN path issues) ──
+THREE.STLLoader = function(manager) {
+    THREE.Loader.call(this, manager);
+};
+THREE.STLLoader.prototype = Object.assign(Object.create(THREE.Loader.prototype), {
+    constructor: THREE.STLLoader,
+    load: function(url, onLoad, onProgress, onError) {
+        var scope = this;
+        var loader = new THREE.FileLoader(this.manager);
+        loader.setResponseType('arraybuffer');
+        loader.setRequestHeader(this.requestHeader);
+        loader.setWithCredentials(this.withCredentials);
+        loader.load(url, function(text) { onLoad(scope.parse(text)); }, onProgress, onError);
+    },
+    parse: function(data) {
+        var binData = this.ensureBinary(data);
+        return this.isBinary(binData) ? this.parseBinary(binData) : this.parseASCII(this.ensureString(data));
+    },
+    isBinary: function(data) {
+        var expect, face_size, n_faces, reader;
+        reader = new DataView(data);
+        face_size = (32 / 8 * 3) + ((32 / 8 * 3) * 3) + (16 / 8);
+        n_faces = reader.getUint32(80, true);
+        expect = 80 + (32 / 8) + (n_faces * face_size);
+        if (expect === data.byteLength) return true;
+        var header = new Uint8Array(data, 0, 80);
+        for (var i = 0; i < header.length; i++) {
+            if (header[i] > 127) return true;
+        }
+        return false;
+    },
+    ensureBinary: function(buf) {
+        if (typeof buf === 'string') {
+            var array_buffer = new Uint8Array(buf.length);
+            for (var i = 0; i < buf.length; i++) array_buffer[i] = buf.charCodeAt(i) & 0xff;
+            return array_buffer.buffer || array_buffer;
+        } else { return buf; }
+    },
+    ensureString: function(buf) {
+        if (typeof buf === 'string') return buf;
+        return new TextDecoder().decode(new Uint8Array(buf));
+    },
+    parseBinary: function(data) {
+        var reader = new DataView(data);
+        var faces = reader.getUint32(80, true);
+        var r, g, b, hasColors = false, colors;
+        var defaultR, defaultG, defaultB, alpha;
+        for (var index = 0; index < 80 - 10; index++) {
+            if ((reader.getUint32(index, false) == 0x434F4C4F /*COLO*/) &&
+                (reader.getUint8(index + 4) == 0x52 /*R*/) &&
+                (reader.getUint8(index + 5) == 0x3D /*=*/)) {
+                hasColors = true;
+                colors = new Float32Array(faces * 3 * 3);
+                defaultR = reader.getUint8(index + 6) / 255;
+                defaultG = reader.getUint8(index + 7) / 255;
+                defaultB = reader.getUint8(index + 8) / 255;
+                alpha = reader.getUint8(index + 9) / 255;
+            }
+        }
+        var dataOffset = 84;
+        var faceLength = 12 * 4 + 2;
+        var geometry = new THREE.BufferGeometry();
+        var vertices = new Float32Array(faces * 3 * 3);
+        var normals = new Float32Array(faces * 3 * 3);
+        for (var face = 0; face < faces; face++) {
+            var start = dataOffset + face * faceLength;
+            var normalX = reader.getFloat32(start, true);
+            var normalY = reader.getFloat32(start + 4, true);
+            var normalZ = reader.getFloat32(start + 8, true);
+            if (hasColors) {
+                var packedColor = reader.getUint16(start + 48, true);
+                if ((packedColor & 0x8000) === 0) {
+                    r = (packedColor & 0x1F) / 31;
+                    g = ((packedColor >> 5) & 0x1F) / 31;
+                    b = ((packedColor >> 10) & 0x1F) / 31;
+                } else { r = defaultR; g = defaultG; b = defaultB; }
+            }
+            for (var i = 1; i <= 3; i++) {
+                var vertexstart = start + i * 12;
+                var componentIdx = (face * 3 * 3) + ((i - 1) * 3);
+                vertices[componentIdx] = reader.getFloat32(vertexstart, true);
+                vertices[componentIdx + 1] = reader.getFloat32(vertexstart + 4, true);
+                vertices[componentIdx + 2] = reader.getFloat32(vertexstart + 8, true);
+                normals[componentIdx] = normalX;
+                normals[componentIdx + 1] = normalY;
+                normals[componentIdx + 2] = normalZ;
+                if (hasColors) {
+                    colors[componentIdx] = r;
+                    colors[componentIdx + 1] = g;
+                    colors[componentIdx + 2] = b;
+                }
+            }
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+        geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+        if (hasColors) {
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.hasColors = true;
+            geometry.alpha = alpha;
+        }
+        return geometry;
+    },
+    parseASCII: function(data) {
+        var geometry = new THREE.BufferGeometry();
+        var patternSolid = /solid([\s\S]*?)endsolid/g;
+        var patternFace = /facet([\s\S]*?)endfacet/g;
+        var patternFloat = /[\s]+([+-]?(?:\d*)(?:\.\d*)?(?:[eE][+-]?\d+)?)/.source;
+        var patternVertex = new RegExp('vertex' + patternFloat + patternFloat + patternFloat, 'g');
+        var patternNormal = new RegExp('normal' + patternFloat + patternFloat + patternFloat, 'g');
+        var vertices = [], normals = [];
+        var normal = new THREE.Vector3();
+        var result;
+        var endVertex = 0, startVertex = 0;
+        while ((result = patternSolid.exec(data)) !== null) {
+            startVertex = endVertex;
+            var solid = result[0];
+            while ((result = patternFace.exec(solid)) !== null) {
+                var vertexCountPerFace = 0, normalCountPerFace = 0;
+                var text = result[0];
+                while ((result = patternNormal.exec(text)) !== null) {
+                    normal.x = parseFloat(result[1]); normal.y = parseFloat(result[2]); normal.z = parseFloat(result[3]);
+                    normalCountPerFace++;
+                }
+                while ((result = patternVertex.exec(text)) !== null) {
+                    vertices.push(parseFloat(result[1]), parseFloat(result[2]), parseFloat(result[3]));
+                    normals.push(normal.x, normal.y, normal.z);
+                    vertexCountPerFace++;
+                    endVertex++;
+                }
+            }
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        return geometry;
+    }
+});
+
+// ── Viewer state ──
+var viewerScene, viewerCamera, viewerRenderer, viewerControls, viewerMesh, animFrameId;
+
+function openViewer(previewEl) {
+    var card = previewEl.closest('.design-card');
+    var stlFile = card.dataset.stl;
+    var name = card.querySelector('h3').textContent;
+    var meta = card.querySelector('.card-meta').textContent.trim();
+
+    document.getElementById('modalTitle').textContent = name.toUpperCase();
+    document.getElementById('modalMeta').textContent = meta;
+    document.getElementById('modalDlBtn').href = stlFile;
+    document.getElementById('modalDlBtn').download = stlFile;
+    document.getElementById('viewerLoading').style.display = 'flex';
+    document.getElementById('viewerModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Small delay so modal animation plays before heavy GL init
+    setTimeout(function() { initViewer(stlFile); }, 60);
+}
+
+function closeViewer() {
+    document.getElementById('viewerModal').classList.remove('open');
+    document.body.style.overflow = '';
+    if (animFrameId) cancelAnimationFrame(animFrameId);
+    if (viewerRenderer) {
+        viewerRenderer.dispose();
+        var wrap = document.getElementById('viewer-canvas-wrap');
+        var canvas = wrap.querySelector('canvas');
+        if (canvas) wrap.removeChild(canvas);
+        viewerRenderer = null;
+    }
+    if (viewerMesh) { viewerScene && viewerScene.remove(viewerMesh); viewerMesh = null; }
+}
+
+function initViewer(stlFile) {
+    var wrap = document.getElementById('viewer-canvas-wrap');
+    var W = wrap.clientWidth, H = wrap.clientHeight;
+
+    // Scene
+    viewerScene = new THREE.Scene();
+    viewerScene.background = new THREE.Color(0x070a1a);
+
+    // Camera
+    viewerCamera = new THREE.PerspectiveCamera(45, W / H, 0.1, 10000);
+    viewerCamera.position.set(0, 0, 200);
+
+    // Renderer
+    viewerRenderer = new THREE.WebGLRenderer({ antialias: true });
+    viewerRenderer.setPixelRatio(window.devicePixelRatio);
+    viewerRenderer.setSize(W, H);
+    wrap.appendChild(viewerRenderer.domElement);
+
+    // Lights
+    var ambient = new THREE.AmbientLight(0x223344, 1.2);
+    viewerScene.add(ambient);
+    var dir1 = new THREE.DirectionalLight(0x00ffff, 1.0);
+    dir1.position.set(1, 2, 3);
+    viewerScene.add(dir1);
+    var dir2 = new THREE.DirectionalLight(0x00ff88, 0.6);
+    dir2.position.set(-2, -1, -1);
+    viewerScene.add(dir2);
+    var dir3 = new THREE.DirectionalLight(0xffffff, 0.4);
+    dir3.position.set(0, 3, -2);
+    viewerScene.add(dir3);
+
+    // Grid
+    var grid = new THREE.GridHelper(300, 20, 0x00ffff, 0x112233);
+    grid.material.opacity = 0.25;
+    grid.material.transparent = true;
+    viewerScene.add(grid);
+
+    // Load STL
+    var loader = new THREE.STLLoader();
+    loader.load(stlFile, function(geometry) {
+        geometry.computeBoundingBox();
+        geometry.computeVertexNormals();
+        var box = geometry.boundingBox;
+        var center = new THREE.Vector3();
+        box.getCenter(center);
+        geometry.translate(-center.x, -center.y, -center.z);
+
+        var size = new THREE.Vector3();
+        box.getSize(size);
+        var maxDim = Math.max(size.x, size.y, size.z);
+        var scale = 100 / maxDim;
+        geometry.scale(scale, scale, scale);
+
+        var material = new THREE.MeshPhongMaterial({
+            color: 0x00ccdd,
+            emissive: 0x001a22,
+            specular: 0x00ffff,
+            shininess: 60,
+            side: THREE.DoubleSide
+        });
+        viewerMesh = new THREE.Mesh(geometry, material);
+        viewerScene.add(viewerMesh);
+
+        // Fit camera
+        var scaledSize = maxDim * scale;
+        viewerCamera.position.set(0, scaledSize * 0.4, scaledSize * 1.4);
+        viewerCamera.lookAt(0, 0, 0);
+
+        // Grid position
+        grid.position.y = -scaledSize * 0.5 * scale * 50;
+
+        document.getElementById('viewerLoading').style.display = 'none';
+    }, undefined, function(err) {
+        document.getElementById('viewerLoading').innerHTML = '<span style="color:#ff4466;font-family:monospace">Failed to load model</span>';
+    });
+
+    // Simple orbit controls
+    var isDragging = false, isRightDrag = false;
+    var prevMouse = { x: 0, y: 0 };
+    var spherical = { theta: 0.3, phi: 1.1, radius: 200 };
+    var panOffset = new THREE.Vector3();
+
+    function updateCamera() {
+        viewerCamera.position.x = panOffset.x + spherical.radius * Math.sin(spherical.phi) * Math.sin(spherical.theta);
+        viewerCamera.position.y = panOffset.y + spherical.radius * Math.cos(spherical.phi);
+        viewerCamera.position.z = panOffset.z + spherical.radius * Math.sin(spherical.phi) * Math.cos(spherical.theta);
+        viewerCamera.lookAt(panOffset);
+    }
+
+    var canvas = viewerRenderer.domElement;
+    canvas.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        isRightDrag = e.button === 2;
+        prevMouse.x = e.clientX; prevMouse.y = e.clientY;
+    });
+    window.addEventListener('mouseup', function() { isDragging = false; });
+    canvas.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        var dx = e.clientX - prevMouse.x, dy = e.clientY - prevMouse.y;
+        if (isRightDrag) {
+            var panSpeed = spherical.radius * 0.001;
+            panOffset.x -= dx * panSpeed;
+            panOffset.y += dy * panSpeed;
+        } else {
+            spherical.theta -= dx * 0.008;
+            spherical.phi = Math.max(0.05, Math.min(Math.PI - 0.05, spherical.phi - dy * 0.008));
+        }
+        prevMouse.x = e.clientX; prevMouse.y = e.clientY;
+        updateCamera();
+    });
+    canvas.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        spherical.radius = Math.max(10, spherical.radius + e.deltaY * 0.3);
+        updateCamera();
+    }, { passive: false });
+    canvas.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+    // Touch support
+    var lastTouchDist = 0;
+    canvas.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+            isDragging = true; isRightDrag = false;
+            prevMouse.x = e.touches[0].clientX; prevMouse.y = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+            isDragging = false;
+            lastTouchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        }
+    }, { passive: true });
+    canvas.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        if (e.touches.length === 1 && isDragging) {
+            var dx = e.touches[0].clientX - prevMouse.x, dy = e.touches[0].clientY - prevMouse.y;
+            spherical.theta -= dx * 0.008;
+            spherical.phi = Math.max(0.05, Math.min(Math.PI - 0.05, spherical.phi - dy * 0.008));
+            prevMouse.x = e.touches[0].clientX; prevMouse.y = e.touches[0].clientY;
+            updateCamera();
+        } else if (e.touches.length === 2) {
+            var dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            spherical.radius = Math.max(10, spherical.radius - (dist - lastTouchDist) * 0.5);
+            lastTouchDist = dist;
+            updateCamera();
+        }
+    }, { passive: false });
+    canvas.addEventListener('touchend', function() { isDragging = false; });
+
+    updateCamera();
+
+    // Handle resize
+    window.addEventListener('resize', function onResize() {
+        if (!viewerRenderer) { window.removeEventListener('resize', onResize); return; }
+        var W2 = wrap.clientWidth, H2 = wrap.clientHeight;
+        viewerCamera.aspect = W2 / H2;
+        viewerCamera.updateProjectionMatrix();
+        viewerRenderer.setSize(W2, H2);
+    });
+
+    // Render loop
+    function animate() {
+        animFrameId = requestAnimationFrame(animate);
+        if (viewerMesh) viewerMesh.rotation.y += 0.003;
+        viewerRenderer.render(viewerScene, viewerCamera);
+    }
+    animate();
+}
+
+// Filter
+function filterCards(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.design-card').forEach(card => {
+        var show = category === 'all' || card.dataset.category === category;
+        card.style.display = show ? '' : 'none';
+        if (show) card.style.animation = 'fadeIn .35s ease forwards';
+    });
+}
+
+// Close on overlay click
+document.getElementById('viewerModal').addEventListener('click', function(e) {
+    if (e.target === this) closeViewer();
+});
+
+// Close on Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeViewer();
+});
+</script>
+</body>
+</html>

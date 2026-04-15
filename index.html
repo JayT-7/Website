@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jay Singh Tomar - Future Engineer</title>
+
     <style>
-    * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
- 
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
@@ -18,109 +19,57 @@
             background: #0a0e27;
             overflow-x: hidden;
         }
- 
+
         .bg-grid {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background-image:
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 0;
         }
- 
+
         header {
             position: relative;
             background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
             padding: 120px 20px 80px;
             text-align: center;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
-            overflow: hidden;
+            border-bottom: 2px solid rgba(0,255,255,0.2);
         }
- 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            animation: scan 3s infinite;
-        }
- 
-        @keyframes scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
- 
+
         header h1 {
             font-size: 4em;
             margin-bottom: 10px;
             background: linear-gradient(135deg, #00ffff, #00ff88);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             font-weight: 800;
-            letter-spacing: -2px;
-            animation: glowPulse 3s ease-in-out infinite;
         }
- 
-        @keyframes glowPulse {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8)); }
-        }
- 
+
         header p {
             font-size: 1.4em;
             color: #00ffff;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-weight: 300;
         }
- 
+
         nav {
             position: sticky;
             top: 0;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(10,14,39,0.95);
             padding: 20px;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
             text-align: center;
+            z-index: 10;
         }
- 
+
         nav a {
             color: #00ffff;
             text-decoration: none;
             margin: 0 25px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            position: relative;
         }
- 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00ffff, #00ff88);
-            transition: width 0.3s;
-        }
- 
-        nav a:hover::after {
-            width: 100%;
-        }
- 
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -128,380 +77,128 @@
             position: relative;
             z-index: 1;
         }
- 
+
         section {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.6), rgba(15, 20, 40, 0.6));
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(26,31,58,0.6), rgba(15,20,40,0.6));
             margin: 40px 0;
             padding: 60px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(0,255,255,0.2);
         }
- 
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(0, 255, 255, 0.05), transparent);
-            pointer-events: none;
-        }
- 
+
         h2 {
             color: #00ffff;
             font-size: 2.5em;
             margin-bottom: 40px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
         }
- 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #00ffff, #00ff88);
-            border-radius: 2px;
-        }
- 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
- 
-        .skill-card {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 255, 136, 0.05));
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
- 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
- 
-        .skill-card:hover::before {
-            opacity: 1;
-        }
- 
-        .skill-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
-            border-color: #00ffff;
-        }
- 
-        .skill-card h3 {
-            color: #00ff88;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            font-weight: 600;
-        }
- 
-        .skill-card p {
-            color: #b0b0b0;
-            line-height: 1.7;
-        }
- 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-        }
- 
-        .project-card {
-            background: linear-gradient(135deg, rgba(20, 25, 45, 0.8), rgba(10, 15, 30, 0.8));
-            padding: 35px;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
- 
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
- 
-        .project-card:hover::after {
-            left: 100%;
-        }
- 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 50px rgba(0, 255, 255, 0.2);
-            border-color: #00ffff;
-        }
- 
-        .project-card h3 {
-            color: #00ffff;
-            margin-bottom: 15px;
-            font-size: 1.6em;
-            font-weight: 600;
-        }
- 
-        .project-card p {
-            color: #b0b0b0;
-            line-height: 1.7;
-        }
- 
-        /* ── Images / Gallery section ── */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 10px;
-        }
- 
-        .gallery-item {
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 12px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.4);
-            transition: all 0.4s;
-        }
- 
-        .gallery-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.25);
-            border-color: #00ffff;
-        }
- 
-        .gallery-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
- 
-        .gallery-item p {
-            padding: 12px 16px;
-            font-size: 0.9em;
-            color: #b0b0b0;
-            text-align: center;
-        }
- 
-        /* ── Certificates (below gallery) ── */
-        .cert-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 40px;
-        }
- 
-        .cert-label {
-            font-size: 1.1em;
-            color: #b0b0b0;
-            text-align: center;
-        }
- 
-        .cert-frame {
-            width: 100%;
-            height: 600px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.4);
-        }
- 
-        .cert-download {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(0, 255, 136, 0.15));
-            color: #00ffff;
-            padding: 14px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid rgba(0, 255, 255, 0.4);
-            transition: all 0.4s;
-        }
- 
-        .cert-download:hover {
-            background: linear-gradient(135deg, #00ffff, #00ff88);
-            color: #000;
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
-            transform: translateY(-3px);
-        }
- 
-        /* ── Photo Gallery ── */
+
+        .skills-grid,
+        .projects,
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
-            margin-top: 20px;
         }
- 
+
+        .skill-card,
+        .project-card {
+            background: rgba(0,0,0,0.35);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0,255,255,0.25);
+        }
+
+        .skill-card h3 {
+            color: #00ff88;
+            margin-bottom: 12px;
+        }
+
+        .project-card h3 {
+            color: #00ffff;
+            margin-bottom: 12px;
+        }
+
+        .cert-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .cert-frame {
+            width: 100%;
+            height: 500px;
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 12px;
+        }
+
+        .cert-download,
+        .cta-button {
+            display: inline-block;
+            width: fit-content;
+            background: linear-gradient(135deg, #00ffff, #00ff88);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
         .gallery-item {
             position: relative;
-            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(0, 255, 255, 0.25);
-            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
             aspect-ratio: 4 / 3;
-            transition: all 0.4s;
+            cursor: pointer;
         }
- 
-        .gallery-item:hover {
-            transform: translateY(-6px);
-            border-color: #00ffff;
-            box-shadow: 0 12px 35px rgba(0, 255, 255, 0.25);
-        }
- 
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.4s;
         }
- 
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
- 
+
         .gallery-caption {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+            padding: 20px 14px 12px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             color: #00ffff;
-            font-size: 0.9em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            padding: 30px 16px 14px;
-            text-transform: uppercase;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
- 
-        .gallery-item:hover .gallery-caption {
-            opacity: 1;
-        }
- 
-        /* lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
- 
-        .lightbox.open {
-            display: flex;
-        }
- 
-        .lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.4);
-            box-shadow: 0 0 60px rgba(0, 255, 255, 0.2);
-        }
- 
-        .lightbox-close {
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            font-size: 2.5em;
-            color: #00ffff;
-            cursor: pointer;
-            line-height: 1;
-            transition: color 0.3s;
-        }
- 
-        .lightbox-close:hover { color: #00ff88; }
- 
-        /* ── Contact ── */
+
         .contact-info {
             text-align: center;
             font-size: 1.2em;
             line-height: 2.5;
         }
- 
-        .contact-info a {
-            color: #00ffff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
         }
- 
-        .contact-info a:hover {
-            color: #00ff88;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+
+        .lightbox.open {
+            display: flex;
         }
- 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #00ffff, #00ff88);
-            color: #000000;
-            padding: 18px 50px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.4s;
-            box-shadow: 0 5px 25px rgba(0, 255, 255, 0.3);
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
         }
- 
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.5);
-            color: #000000;
-        }
- 
+
         footer {
             background: linear-gradient(135deg, #1a1f3a, #0a0e27);
             color: #00ffff;
             text-align: center;
             padding: 40px;
             margin-top: 60px;
-            border-top: 2px solid rgba(0, 255, 255, 0.2);
-        }
- 
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5em; }
-            section { padding: 40px 25px; }
-            nav a { display: block; margin: 15px 0; }
-            h2 { font-size: 2em; }
-            .cert-frame { height: 400px; }
         }
     </style>
 </head>
@@ -524,25 +221,63 @@
     <div class="container">
         <section id="about">
             <h2>About Me</h2>
-            <p>I'm Jay Tomar, a high schooler passionate about robotics, Arduino, PCB design, and FTC engineering.</p>
+            <p>
+                I'm Jay Tomar, a high schooler with a passion for technology and robotics.
+                I work on Arduino projects, PCB/circuit design, and compete in FIRST Tech Challenge.
+                My hands-on experience has taught me problem-solving, precision, and dedication.
+            </p>
+            <p style="margin-top: 20px;">
+                I'm actively seeking opportunities to apply my skills in a professional environment.
+            </p>
         </section>
 
         <section id="skills">
             <h2>Technical Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card"><h3>Arduino</h3><p>C programming and circuits.</p></div>
-                <div class="skill-card"><h3>Electronics</h3><p>Breadboards, soldering, PCB work.</p></div>
-                <div class="skill-card"><h3>FTC Robotics</h3><p>CAD, mechanisms, strategy.</p></div>
-                <div class="skill-card"><h3>Programming</h3><p>Arduino C, Java, Python.</p></div>
+                <div class="skill-card">
+                    <h3>🔌 Arduino Development</h3>
+                    <p>Introductory C programming and circuit design.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🔧 Electronics & Circuits</h3>
+                    <p>Breadboards, soldering, and electronics projects.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🤖 Robotics (FTC)</h3>
+                    <p>CAD, programming, assembly, and strategy.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>💻 Programming</h3>
+                    <p>Arduino C, OnBot Java, Python, servos, motors.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>🖥️ Software Tools</h3>
+                    <p>Fusion 360, TinkerCAD, KiCAD, Canva, Android Studio, VS Code.</p>
+                </div>
             </div>
         </section>
 
         <section id="projects">
             <h2>Experience & Projects</h2>
             <div class="projects">
-                <div class="project-card"><h3>FTC</h3><p>CAD, programming, mechanisms.</p></div>
-                <div class="project-card"><h3>Arduino CNC</h3><p>Currently building CNC drawing machine.</p></div>
-                <div class="project-card"><h3>KiCAD Circuits</h3><p>Custom PCB and breadboard prototypes.</p></div>
+                <div class="project-card">
+                    <h3>FIRST Tech Challenge</h3>
+                    <p>Team lead, CAD designer, programming assistant, and mechanism builder.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Arduino CNC</h3>
+                    <p>Currently building a CNC drawing machine.</p>
+                </div>
+                <div class="project-card">
+                    <h3>KiCAD Circuits</h3>
+                    <p>Custom PCB and breadboard prototypes.</p>
+                </div>
+                <a href="designs.html" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="project-card">
+                        <h3>3D Designs</h3>
+                        <p>FTC and personal project designs free to use.</p>
+                    </div>
+                </a>
             </div>
         </section>
 
@@ -552,26 +287,28 @@
             <div class="cert-wrapper">
                 <p>Java Certificate</p>
                 <iframe class="cert-frame" src="JayTomarJavaCertificate.pdf"></iframe>
-                <a href="JayTomarJavaCertificate.pdf" class="cert-download" target="_blank">View Document</a>
+                <a href="JayTomarJavaCertificate.pdf" class="cert-download">View Document</a>
             </div>
 
             <div class="cert-wrapper">
                 <p>U&I Technology Award</p>
                 <iframe class="cert-frame" src="outstandingSteam.pdf"></iframe>
-                <a href="outstandingSteam.pdf" class="cert-download" target="_blank">View Certificate</a>
+                <a href="outstandingSteam.pdf" class="cert-download">View Certificate</a>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLight('photo1.png')">
-                    <img src="stepper_motor_arm_preview.png" alt="Stepperarm">
+                <div class="gallery-item" onclick="openLight('stepper_motor_arm_preview.png')">
+                    <img src="stepper_motor_arm_preview.png" alt="Stepper Arm" />
                     <div class="gallery-caption">Stepper Motor Arm Attachment</div>
                 </div>
-                <div class="gallery-item" onclick="openLight('photo2.png')">
-                    <img src="FtcDrivePlate.png" alt="Ftcdrivetrain">
+
+                <div class="gallery-item" onclick="openLight('FtcDrivePlate.png')">
+                    <img src="FtcDrivePlate.png" alt="FTC Drivetrain" />
                     <div class="gallery-caption">FTC Drivetrain Prototype</div>
                 </div>
-                <div class="gallery-item" onclick="openLight('photo3.png')">
-                    <img src="CNC Pen Holder.png" alt="Penholder">
+
+                <div class="gallery-item" onclick="openLight('CNC Pen Holder.png')">
+                    <img src="CNC Pen Holder.png" alt="CNC Pen Holder" />
                     <div class="gallery-caption">CNC Pen Holder</div>
                 </div>
             </div>
@@ -588,12 +325,11 @@
     </div>
 
     <div class="lightbox" id="lightbox" onclick="closeLight()">
-        <span class="lightbox-close">✕</span>
-        <img id="lightbox-img" src="" alt="">
+        <img id="lightbox-img" src="" alt="" />
     </div>
 
     <footer>
-        <p>&copy 2026 Jay Singh Tomar. All rights reserved.</p>
+        <p>&copy; 2026 Jay Singh Tomar. All rights reserved.</p>
     </footer>
 
     <script>
@@ -605,10 +341,6 @@
         function closeLight() {
             document.getElementById('lightbox').classList.remove('open');
         }
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeLight();
-        });
     </script>
 </body>
 </html>
